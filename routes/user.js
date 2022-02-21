@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { insertUser } = require('../controllers/users');
+const { insertUser } = require('../DAO/usersDAO');
 const { deleteUser } = require('../controllers/users/deleteUserController');
 
 const router = Router();

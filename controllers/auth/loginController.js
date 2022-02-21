@@ -1,6 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const { generateJWT } = require("../../helpers/jwt");
-const { getUserByEmail } = require("../users");
+const { getUserByEmail } = require("../../DAO/usersDAO");
 
 const loginUser = async (req, res) => {
     //Obtenemos el email y el password a través del body
@@ -14,7 +14,7 @@ const loginUser = async (req, res) => {
     }
     try {
         //Se localiza el email en la base de datos
-        const [data] = await getUserByEmail(email)
+        const [data] = await getUserByEmail(email);
         //Si la función no devuelve nada entones finaliza con false
         if (data.length === 0) {
             return res.status(404).json({

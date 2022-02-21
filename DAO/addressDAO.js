@@ -1,4 +1,4 @@
-const pool = require('../../database/config');
+const pool = require('../database/config');
 
 //Insertar un nuevo address
 const insertAddressByUserId = async (country, state, city, street, homeNumber, floor, door, zipcode, userId) => {

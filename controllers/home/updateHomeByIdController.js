@@ -1,4 +1,4 @@
-const { updateHomeById } = require("./homeDAO");
+const { updateHomeById } = require('../../DAO/addressDAO');
 
 //Actualizar home por su id
 const updateHome = async (req, res) => {

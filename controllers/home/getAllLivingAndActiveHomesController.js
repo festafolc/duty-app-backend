@@ -1,4 +1,4 @@
-const { getAllLivingAndActiveHomes } = require("./homeDAO");
+const { getAllLivingAndActiveHomes } = require('../../DAO/addressDAO');
 
 //Obtener todos los homes vivos y activos
 const allLivingAndActiveHomes = async (req, res) => {

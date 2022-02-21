@@ -1,4 +1,4 @@
-const { getHomeById } = require("./homeDAO");
+const { getHomeById } = require('../../DAO/addressDAO');
 
 //Obtener home por id
 const getHome = async (req, res) => {

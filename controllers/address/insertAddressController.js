@@ -1,4 +1,4 @@
-const { insertAddressByUserId } = require("./addressDAO");
+const { insertAddressByUserId } = require("../../DAO/addressDAO");
 
 
 //insertar un address

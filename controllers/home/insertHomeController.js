@@ -1,4 +1,4 @@
-const { insertHomeByUserId } = require("./homeDAO");
+const { insertHomeByUserId } = require('../../DAO/addressDAO');
 
 //Insertar un home
 const insertHome = async (req, res) => {

@@ -1,4 +1,4 @@
-const { deactivateHomeById } = require('./homeDAO');
+const { deactivateHomeById } = require('../../DAO/addressDAO');
 
 //Desactivar el home por su id
 const deactivateHome = async (req, res) => {

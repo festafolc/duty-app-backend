@@ -1,4 +1,4 @@
-const { getAllLivingHomesByUserId } = require("./homeDAO");
+const { getAllLivingHomesByUserId } = require('../../DAO/addressDAO');
 
 //Obtener todos los homes vivos por id del usuario
 const getAllLivingHomesByUser = async (req, res) => {

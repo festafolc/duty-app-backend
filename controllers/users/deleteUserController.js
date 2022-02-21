@@ -1,4 +1,4 @@
-const { deleteUserById } = require("../users");
+const { deleteUserById } = require("../../DAO/usersDAO");
 
 const deleteUser = async (req, res) => {
     //Obtenemos el id a través del body

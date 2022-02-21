@@ -1,16 +1,7 @@
-const pool = require('../../database/config');
+const pool = require('../database/config');
 
 //Insertar un nuevo home
-const insertHomeByUserId = async (name, type, country, state, city, street, homeNumber, floor, door, zipcode, userId) => {
-    //Se establece la query para insertar un nuevo home
-    const queryAddress = "INSERT INTO ADDRESS (country, state, city, street, home_number, floor, door, zipcode, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    //Se ejecuta la query en la base de datos
-    const dataAddress = await pool.promise().query(queryAddress, [country, state, city, street, homeNumber, floor, door, zipcode, userId], (err) => {
-        //Si hay un error con la ejecución de la query se lanza el error
-        if (err) throw err;
-    });
-    //Obtenemos el id del objeto address para usarla como FK en el objeto home
-    const {insertId: addressId} = dataAddress[0];
+const insertHomeByUserId = async (name, type, addressId) => {
     //Se establece la query para insertar un nuevo home
     const queryHome = "INSERT INTO HOME (name, type, address_id) VALUES (?, ?, ?);";
     //Se ejecuta la query en la base de datos

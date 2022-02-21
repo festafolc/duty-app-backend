@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { insertUser } = require('../DAO/usersDAO');
+const { insertUserController } = require('../controllers/users/insertUserController');
 const { deleteUser } = require('../controllers/users/deleteUserController');
 
 const router = Router();
 
-router.post('/signup', insertUser);
+router.post('/signup', insertUserController);
 
 router.put('/', deleteUser);
 

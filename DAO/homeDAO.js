@@ -4,6 +4,7 @@ const pool = require('../../database/config');
 const insertHomeByUserId = async (name, type, country, state, city, street, homeNumber, floor, door, zipcode, userId) => {
     //Se establece la query para insertar un nuevo home
     const queryAddress = "INSERT INTO ADDRESS (country, state, city, street, home_number, floor, door, zipcode, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    //Se ejecuta la query en la base de datos
     const dataAddress = await pool.promise().query(queryAddress, [country, state, city, street, homeNumber, floor, door, zipcode, userId], (err) => {
         //Si hay un error con la ejecución de la query se lanza el error
         if (err) throw err;

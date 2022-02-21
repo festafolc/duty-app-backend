@@ -3,42 +3,19 @@ const pool = require('../database/config');
 
 
 //Crear usuario
-const insertUser = async (req, res) => {
-    //Obtenemos los atributos del objeto a través del body
-    const {name, surname, surname2, birth, email, phone, username, password} = req.body;
-    //Se crea la función
-    const insertUser_ = async () => {
-        //Se abre conexión con la base de datos
-        pool.getConnection((err, connection) => {
-            //Si hay un error en la conexión se lanza el error
-            if (err) throw err;
-            //Se encripta la contraseña
-            const salt = bcryptjs.genSaltSync(10);
-            const hashPassword = bcryptjs.hashSync(password, salt);
-            //Se establece y se ejecuta la query
-            connection.query("INSERT INTO USERS (name, surname, surname2, birth, email, phone, username, password) VALUES (?, ?, ? , ?, ?, ?, ?, ?);",
-                            [name, surname, surname2, birth, email, phone, username, hashPassword],
-                            (err, rows) => {
-                //Devolvemos la conexión a la pool
-                connection.release();
-                //Si hay un error con la ejecución de la query se lanza el error
-                if (err) throw err;
-                //Se deuvuelve el objeto guardado
-                return res.status(201).json({
-                    ok: true,
-                    msg: 'New user registered',
-                    rows,
-                    user: {name, surname, surname2, birth, email, phone, username, password}
-                });
-            });
-        });
-    }
-    try {
-        //Se ejecuta la función que inserta un usuario nuevo
-        await insertUser_();
-    } catch (error) {
-        console.log(error);
-    }
+const insertUser = async (name, surname, surname2, birth, email, phone, username, password) => {
+    //Se establece la query para insertar un nuevo usuario
+    const query = "INSERT INTO USERS (name, surname, surname2, birth, email, phone, username, password) VALUES (?, ?, ? , ?, ?, ?, ?, ?);";
+    //Se encripta la contraseña
+    const salt = bcryptjs.genSaltSync(10);
+    const hashPassword = bcryptjs.hashSync(password, salt);    
+    //Se ejecuta la query en la base de datos
+    const data = await pool.promise().query(query, [name, surname, surname2, birth, email, phone, username, hashPassword], (err) => {
+        //Si hay un error con la ejecución de la query se lanza el error
+        if (err) throw err;
+    });
+    //Se devuelve el objeto usuario insertado
+    return data;
 }
 
 //Encontrar usuario por email

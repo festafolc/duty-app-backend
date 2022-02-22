@@ -1,4 +1,4 @@
-const { activateHomeById } = require('../../DAO/addressDAO')
+const { activateHomeById } = require('../../DAO/homeDAO')
 
 //Activar el home por su id
 const activateHome = async (req, res) => {

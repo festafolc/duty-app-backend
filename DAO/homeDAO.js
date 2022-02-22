@@ -16,7 +16,7 @@ const insertHomeByUserId = async (name, type, addressId) => {
 //Obtener todos los homes por id del usuario
 const getAllHomesByUserId = async (id) => {
     //Se establece la query para obtener todos los homes por id del usuario
-    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.home_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ?;";
+    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.street_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ?;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [id], (err) => {
         if (err) throw err;
@@ -28,7 +28,7 @@ const getAllHomesByUserId = async (id) => {
 //Obtener todos los homes vivos por id del usuario
 const getAllLivingHomesByUserId = async (id) => {
     //Se establece la query para obtener todos los homes vivos y activos
-    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.home_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ? AND h.deleted = 0;";
+    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.street_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ? AND h.deleted = 0;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [id], (err) => {
         if (err) throw err;
@@ -40,7 +40,7 @@ const getAllLivingHomesByUserId = async (id) => {
 //Obtener todos los homes vivos y activos
 const getAllLivingAndActiveHomes = async () => {
     //Se establece la query para obtener todos los homes vivos por id del usuario
-    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.home_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE h.deactivated = 'NO' AND h.deleted = 0;";
+    const query = "SELECT h.id, h.name, h.deactivated, a.country, a.state, a.city, a.street, a.street_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE h.deactivated = 'NO' AND h.deleted = 0;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [], (err) => {
         if (err) throw err;
@@ -52,7 +52,7 @@ const getAllLivingAndActiveHomes = async () => {
 //Obtener todos los homes eliminados por id del usuario
 const getAllDeletedHomesByUserId = async (id) => {
     //Se establece la query para obtener todos los homes vivos por id del usuario
-    const query = "SELECT h.id, h.name, h.deactivated, h.deleted, a.country, a.state, a.city, a.street, a.home_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ? AND h.deleted = 1;";
+    const query = "SELECT h.id, h.name, h.deactivated, h.deleted, a.country, a.state, a.city, a.street, a.street_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE a.user_id = ? AND h.deleted = 1;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [id], (err) => {
         if (err) throw err;
@@ -64,7 +64,7 @@ const getAllDeletedHomesByUserId = async (id) => {
 //Obtener un home por su id
 const getHomeById = async (id) => {
     //Se establece la query para obtener todos los homes por id del usuario
-    const query = "SELECT h.id, h.name, a.country, a.state, a.city, a.street, a.home_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE h.id = ?;";
+    const query = "SELECT h.id, h.name, a.country, a.state, a.city, a.street, a.street_number, a.floor, a.door, a.zipcode, ht.name AS type_home FROM HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id WHERE h.id = ?;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [id], (err) => {
         if (err) throw err;
@@ -75,7 +75,7 @@ const getHomeById = async (id) => {
 
 //Actualizar home por id
 const updateHomeById = async (name, type, country, state, city, street, homeNumber, floor, door, zipcode, id) => {
-    const query = "UPDATE HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id SET h.name = ?, h.type = ?, a.country = ?, a.state = ?, a.city = ?, a.street = ?, a.home_number = ?, a.floor = ?, a.door = ?, a.zipcode = ? WHERE h.id = ?;";
+    const query = "UPDATE HOME h JOIN ADDRESS a ON h.address_Id = a.id JOIN HOME_TYPES ht ON h.type = ht.id SET h.name = ?, h.type = ?, a.country = ?, a.state = ?, a.city = ?, a.street = ?, a.street_number = ?, a.floor = ?, a.door = ?, a.zipcode = ? WHERE h.id = ?;";
     //Se ejecuta la query en la base de datos
     const data = await pool.promise().query(query, [name, type, country, state, city, street, homeNumber, floor, door, zipcode, id], (err) => {
         //si hay un error con la ejecución de la query se lanza el error

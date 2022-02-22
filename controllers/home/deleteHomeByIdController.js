@@ -1,4 +1,4 @@
-const { deleteHomeById } = require('../../DAO/addressDAO');
+const { deleteHomeById } = require('../../DAO/homeDAO');
 
 //Eliminar el home por su id
 const deleteHome = async (req, res) => {

@@ -1,4 +1,4 @@
-const { getAllDeletedHomesByUserId } = require('../../DAO/addressDAO');
+const { getAllDeletedHomesByUserId } = require('../../DAO/homeDAO');
 
 const getAllDeletedHomes = async (req, res) => {
     //Obtenemos el id del usuario a través del token

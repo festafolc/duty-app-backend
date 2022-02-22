@@ -1,4 +1,4 @@
-const { recoverHomeById } = require('../../DAO/addressDAO');
+const { recoverHomeById } = require('../../DAO/homeDAO');
 
 //Recuperar el home por su id
 const recoverHome = async (req, res) => {
